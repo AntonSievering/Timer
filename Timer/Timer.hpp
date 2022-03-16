@@ -98,6 +98,11 @@ public:
 		return m_fTotalTime;
 	}
 
+	void reset() noexcept
+	{
+		m_fTotalTime = 0.0f;
+	}
+
 public:
 	template <class RetType, class ... Args>
 	RetType measure(RetType(*fn)(Args ...), Args && ... args) noexcept
@@ -106,7 +111,7 @@ public:
 		return fn(args ...);
 	}
 
-	template <class ObjType, class RetType, class ... Args>
+	template <class RetType, class ObjType, class ... Args>
 	RetType measure(RetType(ObjType::*fn)(Args ...), ObjType *obj, Args && ... args) noexcept
 	{
 		chained_scoped_timer timer(m_fTotalTime);
